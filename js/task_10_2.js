@@ -20,9 +20,6 @@ const parseJSON = function (data) {
     }
 
 
-    if 
-
-
     return data.split("");
 }
 
