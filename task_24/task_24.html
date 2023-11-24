@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 24</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <table class="table">
+            <thead class="table-head">
+                <tr class="table-row">
+                    <th class="table-item">First name</th>
+                    <th class="table-item">Last name</th>
+                    <th class="table-item">Phone</th>
+                    <th class="table-item">Address</th>
+                    <th class="table-item">City</th>
+                    <th class="table-item">State</th>
+                    <th class="table-item">ZIP</th>
+                </tr>
+                <tr class="table-row sort">
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('fname', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('fname', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('lname', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('lname', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('tel', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('tel', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('address', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('address', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('city', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('city', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('state', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('state', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                    <th class="table-item">
+                        <span class="table-sort increase" onClick="itemsSort('zip', true)">
+                            &#9650;
+                        </span>
+                        <span class="table-sort decrease" onClick="itemsSort('zip', false)">
+                            &#9660;
+                        </span>
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody class="table-body">
+            </tbody>
+        </table>
+
+       
+            <button class="btn" type="button">Загрузить ещё</button>
+    </div>
+
+    <template id="row">
+        <tr class="table-row row">
+            <td class="table-item first-name">1</td>
+            <td class="table-item last-name">2</td>
+            <td class="table-item phone ">3</td>
+            <td class="table-item address">4</td>
+            <td class="table-item city">5</td>
+            <td class="table-item state">6</td>
+            <td class="table-item zip">7</td>
+        </tr>
+    </template>
+
+    <script src="../js/task_24.js"></script>
+</body>
+
+</html>
