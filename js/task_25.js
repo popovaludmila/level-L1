@@ -27,7 +27,7 @@ const createTemplate = () => {
 }
 
 body.insertAdjacentHTML("beforeend", createTemplate());
-
+body.append(createElement('div'));
 document.createDocumentFragment
 
 

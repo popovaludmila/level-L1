@@ -6,4 +6,4 @@ function dw(i) {
 
 }
 
-dw(1); // i = 22
+dw(1); // i = 21

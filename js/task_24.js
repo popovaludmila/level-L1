@@ -7,16 +7,17 @@
 
 const api = 'http://www.filltext.com/?rows=1000&fname=%7BfirstName%7D&lname=%7BlastName%7D&tel=%7Bphone%7Cformat%7D&address=%7BstreetAddress%7D&city=%7Bcity%7D&state=%7BusState%7Cabbr%7D&zip=%7Bzip%7D&pretty=true'
 
-const tableBody = document.querySelector('.table-body');
-const templateRow = document.querySelector('#row');
-const btnIncrease = document.querySelectorAll('.increase');
-const btnDecrease = document.querySelectorAll('.decrease');
-const btnLoadMore = document.querySelector('.btn');
+const tableBody = document.querySelector('.table-body'); // тело таблицы
+const templateRow = document.querySelector('#row'); 
+const btnIncrease = document.querySelectorAll('.increase'); // кнопки по убыванию
+const btnDecrease = document.querySelectorAll('.decrease'); // кнопки по возрастанию
+const btnLoadMore = document.querySelector('.btn'); // кнопка загрузить еще
 
-let items = [];
+let items = [];  // создаем переменную для записи данных 
 
 let removeButtonClickEvent = () => null;
 
+// функция для разделения данных на части
 const createChunks = (elements, chunkSize) => {
     const result = [];
 
@@ -30,18 +31,18 @@ const checkResponse = (response) => {
     return response.ok ? response.json() : Promise.reject();
 };
 
-
+// функция сортировки 
 const itemsSort = (field, abs) => {
     items = items.sort((a, b) => {
         let aVal = a[field];
         let bVal = b[field];
 
 
-        if (aVal instanceof String) {
+        if ( typeof aVal === "string") {
             aVal = aVal.toLowerCase();
         }
 
-        if (bVal instanceof String) {
+        if (typeof bVal === "string") {
             bVal = bVal.toLowerCase();
         }
 
@@ -54,6 +55,7 @@ const itemsSort = (field, abs) => {
     loadMoreDatas();
 }
 
+// получаем данные
 const getData = () => {
     fetch(api)
         .then(res => checkResponse(res))
@@ -63,10 +65,12 @@ const getData = () => {
         })
 };
 
+// если данные не получены скрываем кнопку "загрузить еще"
 if (items.length === 0) {
     btnLoadMore.classList.add('hidden');
 }
 
+// отображаем данные на стра
 function render(elements) {
     const tableRowFragment = document.createDocumentFragment();
 

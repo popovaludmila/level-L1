@@ -1,9 +1,9 @@
 // Вычислить размер коллстэка в основных браузерах: Chrome, Firefox, Opera и Safari (если есть возможность).
 
-let count = 0;
-let countTwo = 0;
-const sizeOfVar = 8;
-let k;                          // количество объявленных переменных в теле функции
+let count = 0; // переменная, показывающая сколько раз вызвалась функция
+let countTwo = 0; // переменная, показывающая сколько раз вызвалась функция, если в ней объявлена переменная
+const sizeOfVar = 8; // количество байт, которые занимает переменная в памяти.
+let k;  // количество объявленных переменных в теле функции
 
 
 const func = () => {
@@ -31,6 +31,7 @@ try {
     console.log(countTwo);
 }
 
+// количество байт, которое занимает функция
 const calcFunctionSize = (count, countTwo, k1, k2) => {
     const result = sizeOfVar * (k2 * countTwo - k1 * count) / (count - countTwo);
 
@@ -55,3 +56,5 @@ console.log(calcCallstackSize(0, count));
 // Chrome: count = 13 956, countTwo = 12 560, functionSize = 71.97707736389685, calcCallstackSize = 1 004 512.0916905445
 // Opera: count = 13 922, countTwo = 12 530, functionSize = 72.01149425287356, calcCallstackSize = 1 002 544.0229885057
 // Firefox: count = 26 546, countTwo = 26 236, functionSize = 677.058064516129, calcCallstackSize = 17 973 183.38064516
+
+//https://habr.com/ru/articles/550534/

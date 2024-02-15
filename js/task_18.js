@@ -18,6 +18,7 @@ const getLocalStorageSize = () => {
         //который требует в два раза больше места.
         let amount = (localStorage[x].length * 2) / 1024;
         if (!isNaN(amount) && localStorage.hasOwnProperty(x)) {
+    
             total += amount;
         }
     }
@@ -27,7 +28,7 @@ const getLocalStorageSize = () => {
 try {
     setItem()
 } catch (err) {
-    console.log(` size: ${getLocalStorageSize()} mb`);
+    console.log(` size: ${getLocalStorageSize()} mb`); //  size: 5.526765823364258 mb
 }
 
 export {getLocalStorageSize};

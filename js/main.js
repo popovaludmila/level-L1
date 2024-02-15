@@ -16,10 +16,10 @@ const arrFunctions = [
     () => getPluralWord(1024, 'пользователь', 'пользователя', 'пользователей')];
 
 
-// traversalTree(document.querySelector('.container'));
+ traversalTree(document.querySelector('.container'));
 // addElement();
 
-// console.log(fn(arrFunctions));
+//console.log(fn(arrFunctions));
 //  console.log(getAge('05021958'));
-//  console.log(closure(arrFunctions)());
-//  console.log(someFn(11)(12));
+ console.log(closure(arrFunctions)());
+console.log(someFn(11)(12));

@@ -9,7 +9,7 @@
 
 //  - вычисление N-го числа в ряду Фибоначчи 
 const getNextNumberFibonacci = (n) => {
-  let previous = 1;
+  let previous = 0;
   let current = 1;
 
   for (let i = 3; i <= n; i++) {
@@ -22,14 +22,15 @@ const getNextNumberFibonacci = (n) => {
   return current;
 };
 
-console.log(getNextNumberFibonacci(13));
+console.log(getNextNumberFibonacci(13)); // 233
+console.log(getNextNumberFibonacci(5)); // 5
 
 //- вычисление всех чисел в ряду Фибоначчи до числа N
 
 const getNumbersFibonacci = (number) => {
-  let numbersFibonacci = [1, ]; // массив чисел Фибоначчи
+  let numbersFibonacci = [0, ]; // массив чисел Фибоначчи
 
-  let k = 1; 
+  let k = 2; 
 
   while (number >=  getNextNumberFibonacci(k)) { 
     numbersFibonacci.push(getNextNumberFibonacci(k));
@@ -39,7 +40,8 @@ const getNumbersFibonacci = (number) => {
   return numbersFibonacci;
 }
 
-console.log(getNumbersFibonacci(13));
+console.log(getNumbersFibonacci(4));
+console.log(getNumbersFibonacci(12));
 
 // Функция проверки числа на простое число
 const checkPrimeNumber = (number) => {
@@ -71,7 +73,9 @@ const getPrimeNumbers = (number) => {
 
 };
 
-console.log(getPrimeNumbers(41));
+console.log(getPrimeNumbers(41)); //  [1, 2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
+console.log(getPrimeNumbers(12)); // [1, 2, 3, 4, 5, 7, 11]
+
 
 //  - вычисление N-го простого числа
 
@@ -91,6 +95,6 @@ const getPrimeNumberN = (n) => {
 
 }
 
-console.log(getPrimeNumberN(1));
-console.log(getPrimeNumberN(10));
-console.log(getPrimeNumberN(100));
+console.log(getPrimeNumberN(1)); // 1
+console.log(getPrimeNumberN(10)); // 19
+console.log(getPrimeNumberN(100)); // 521

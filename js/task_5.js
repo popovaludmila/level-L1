@@ -77,13 +77,13 @@ class LinkedList {
 
 // функция конвертация json строки в связный список
 const convertJsonToLinkedList = (json) => {
-    // декодируем json-строку
+    // переводим json-строку в объект
     const list = JSON.parse(json);
-    // создаём инстанс класса
+    // создаём объект класса
     const linkedList = new LinkedList();
 
     // проверяем, что получен именно массив и он не пуст
-    if (!(Array.isArray(list) && list.length > 0)) return 'not an array was passed or the array is empty'
+    if (!(Array.isArray(list) && list.length > 0)) return;
 
     // перебираем массив и для каждого элемента вызываем метод добавления в связный массив
     list.forEach(obj => linkedList.append(obj));

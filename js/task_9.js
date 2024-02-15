@@ -120,4 +120,8 @@ function objectToJSON(el) {
 console.log(JSON.stringify(student));
 console.log(convertToJSON(student));
 
+console.log(JSON.stringify(['html', 'css', 'js']));
+console.log(convertToJSON(['html', 'css', 'js']));
+
+
 

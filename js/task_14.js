@@ -4,22 +4,27 @@
 // Когда говорится "промис разрешается с данными об изображении", это означает, 
 // что промис должен быть успешно выполнен (resolved) с данными об изображении после того, как изображение будет загружено.
 
-const createImg = (tag, where, src) => {
-    const divElement = document.createElement(tag);
-    divElement.src = src;
-    divElement.style.width = "100%";
-    where.append(divElement);
+const loadImage = (url) => {
+    return new Promise(function (resolve, reject) {
+       const img = document.createElement('img')
+        img.onload = function () {
+            // В случае успешной загрузки изображения, разрешаем промис объектом img
+            resolve(img);
+        }
+        img.onerror = function () {
+            // В случае неуспешной загрузки изображения, отклоняем промис с ошибкой
+            reject(new Error("Не удалось загрузить изображение: " + url));
+        }
+        img.src = url;
+    });
 }
 
-let imgSrc = '';
-const getPhoto = (url) => {
-    return fetch(url)
-        .then(result => {
-            imgSrc = result.url;
-            createImg('img', document.body, imgSrc);
-        },
-            error => console.log(error)
-        )
-}
 
-getPhoto('../img/christmas-red-background.png');
+
+loadImage('https://thailand-news.ru/sites/default/files/storage/images/2017-31/pattayacoral.jpg').
+then(result => {
+    document.body.appendChild(result);
+    console.log(`width: ${result.width}, height: ${result.height}`);
+}).catch(err => console.log(err));
+
+

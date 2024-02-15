@@ -22,12 +22,12 @@ const getPluralWord = (number, one, two, multiple) => {
     }
 };
 
-// console.log(getPluralWord(112, 'сообщение', 'сообщения', 'сообщений'));
-// console.log(getPluralWord(12, 'сообщение', 'сообщения', 'сообщений'));
-// console.log(getPluralWord(1, 'сообщение', 'сообщения', 'сообщений'));
+console.log(getPluralWord(112, 'сообщение', 'сообщения', 'сообщений'));
+console.log(getPluralWord(12, 'сообщение', 'сообщения', 'сообщений'));
+console.log(getPluralWord(1, 'сообщение', 'сообщения', 'сообщений'));
 
-// console.log(getPluralWord(1024, 'пользователь', 'пользователя', 'пользователей'));
-// console.log(getPluralWord(1026, 'пользователь', 'пользователя', 'пользователей'));
-// console.log(getPluralWord(121, 'пользователь', 'пользователя', 'пользователей'));
+console.log(getPluralWord(1024, 'пользователь', 'пользователя', 'пользователей'));
+console.log(getPluralWord(1026, 'пользователь', 'пользователя', 'пользователей'));
+console.log(getPluralWord(121, 'пользователь', 'пользователя', 'пользователей'));
 
 export {getPluralWord};

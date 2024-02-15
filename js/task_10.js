@@ -22,8 +22,8 @@ const student = {
 
 const array = ["abcd", {name: 'John', age: 30, isAdmin: false, courses: ['html', 'css', 'js'], wife: null}, 111];
 
-console.log(JSON.stringify([123, 4, "fef"]))
-const stringify = JSON.stringify(array);
+const stringify = JSON.stringify(array); // ["abcd",{"name":"John","age":30,"isAdmin":false,"courses":["html","css","js"],"wife":null},111]
+console.log(typeof stringify)
 const parse = JSON.parse(stringify);
 console.log(stringify);
 console.log(parse);
@@ -33,8 +33,6 @@ const firstCharKeyPunctRE = /[\u2000-\u206F\u2E00-\u2E7F\\'!"#%&()*+,\-.\/:;<=>?
 const firstCharNumberRE = /[*/]/g;
 const strRE = /[a-zA-Z]+/g;
 const numberRE = /^[-+]?[0-9]*[.,]?[0-9]+(?:[eE][-+]?[0-9]+)?$/gm;
-
-const a = "[\"abcd\",{\"name\":\"John\",\"age\":30,\"isAdmin\":false,\"courses\":[\"html\",\"css\",\"js\"],\"wife\":null},111]";
 
 function parseJSON(str) {
     const arr = str.split(",")
@@ -49,8 +47,6 @@ function parseJSON(str) {
 
    return arr;
 };
-
-console.log(parseJSON(a));
 
 function stringToNumber(str) {
     if (firstCharNumberRE.test(srt[0]) && strRE.test(str) || punctREforNumber.test(str)) {
