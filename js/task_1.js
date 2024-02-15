@@ -17,6 +17,7 @@ const checkIsPalindrom = (str) => {
             return false;
         }
     }
+
     return true;
 };
 

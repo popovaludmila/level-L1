@@ -7,45 +7,64 @@
 // 	Будет плюсом, если задумаетесь и об оптимизации.
 
 
-//  - вычисление N-го числа в ряду Фибоначчи 
-const getNextNumberFibonacci = (n) => {
-  let previous = 0;
-  let current = 1;
+const fibonacciGenerator = () => {
+  let current = 0;
+  let next = 1;
 
-  for (let i = 3; i <= n; i++) {
-    let next = previous + current;
+  return () => {
+    let result = current;
 
-    previous = current;
     current = next;
+    next = next + result;
 
+    return result;
   }
-  return current;
-};
-
-console.log(getNextNumberFibonacci(13)); // 233
-console.log(getNextNumberFibonacci(5)); // 5
-
-//- вычисление всех чисел в ряду Фибоначчи до числа N
-
-const getNumbersFibonacci = (number) => {
-  let numbersFibonacci = [0, ]; // массив чисел Фибоначчи
-
-  let k = 2; 
-
-  while (number >=  getNextNumberFibonacci(k)) { 
-    numbersFibonacci.push(getNextNumberFibonacci(k));
-    k++;
-  }
-
-  return numbersFibonacci;
 }
 
-console.log(getNumbersFibonacci(4));
-console.log(getNumbersFibonacci(12));
+//  - вычисление N-го числа в ряду Фибоначчи 
+const getFibonacciNumber = (n) => {
+  if (n < 1) {
+    return;
+  }
+
+  let fib = fibonacciGenerator();
+  for (let i = 0; i < n - 1; i++) {
+    fib();
+  }
+
+  return fib();
+}
+console.log(getFibonacciNumber(3)); // 1
+console.log(getFibonacciNumber(8)); // 13
+
+
+//- вычисление всех чисел в ряду Фибоначчи до числа N
+const getFibonacciNumbersUntil = (n) => {
+  if (n < 1) {
+    return [];
+  }
+
+  let result = [];
+
+  let fib = fibonacciGenerator();
+  while (true) {
+    let fibNum = fib();
+    if (fibNum >= n) {
+      break;
+    }
+
+    result.push(fibNum);
+  }
+
+  return result;
+}
+
+console.log(getFibonacciNumbersUntil(5)); //  [0, 1, 1, 2, 3]
+console.log(getFibonacciNumbersUntil(15)); // [0, 1, 1, 2, 3, 5, 8, 13]
 
 // Функция проверки числа на простое число
 const checkPrimeNumber = (number) => {
-  for (let i = 2; i < (number / 2); i++) {
+  for (let i = 2; i <= (number / 2); i++) {
     if (number % i === 0) {
       return false;
     }
@@ -54,47 +73,68 @@ const checkPrimeNumber = (number) => {
   return true;
 };
 
-console.log("7", checkPrimeNumber(7));
-console.log("4", checkPrimeNumber(4));
-console.log("13", checkPrimeNumber(13));
 
+const primeNumberGenerator = () => {
+  let primeNumber = 1;
+
+  return () => {
+    let result = primeNumber;
+
+    while(true) {
+      primeNumber++;
+
+      if (checkPrimeNumber(primeNumber)) {
+        break;
+      }
+    }
+
+    return result;
+  }
+}
 
 //- вычисление всех простых чисел до числа N
-const getPrimeNumbers = (number) => {
+
+const getPrimeNumbersUntil = (number) => {
   let primeNumbers = [];
 
-  for (let i = 1; i <= number; i++) {
-    if (checkPrimeNumber(i)) {
-      primeNumbers.push(i);
+  if (number < 1) {
+    return [];
+  }
+
+  let primeNumber = primeNumberGenerator();
+
+  while (true) {
+    let primeNum = primeNumber();
+    if (primeNum >= number) {
+      break;
     }
+
+    primeNumbers.push(primeNum);
   }
 
   return primeNumbers;
 
 };
 
-console.log(getPrimeNumbers(41)); //  [1, 2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
-console.log(getPrimeNumbers(12)); // [1, 2, 3, 4, 5, 7, 11]
+console.log(getPrimeNumbersUntil(41)); //  [1, 2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+console.log(getPrimeNumbersUntil(12)); // [1, 2, 3, 4, 5, 7, 11]
 
 
 //  - вычисление N-го простого числа
 
 const getPrimeNumberN = (n) => {
-  let k = 1; // первое простое число
-   
-  let count = 1; // количество простых чисел
-
-  while (n > count) {
-    k++;
-    if (checkPrimeNumber(k)) {
-      count++;
-    }
+  if (n < 1) {
+    return;
   }
 
-  return k;
+  let primeNumber = primeNumberGenerator();
+  for (let i = 0; i < n - 1; i++) {
+    primeNumber();
+  }
 
+  return primeNumber();
 }
 
 console.log(getPrimeNumberN(1)); // 1
-console.log(getPrimeNumberN(10)); // 19
-console.log(getPrimeNumberN(100)); // 521
+console.log(getPrimeNumberN(10)); // 23
+console.log(getPrimeNumberN(100)); // 523
