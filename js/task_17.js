@@ -19,32 +19,24 @@ const apiEnd = '&format=json';
 // - интервал времени, спустя которое функцию следует вызывать.
 function debounce(callee, timeoutMs) {
     return function perform(...args) {
-      // В переменной previousCall мы будем хранить
-      // временную метку предыдущего вызова...
+      // В переменной previousCall хранится временная метка предыдущего вызова...
       let previousCall = this.lastCall
   
-      // ...а в переменной текущего вызова —
-      // временную метку нынешнего момента.
+      // а в переменной текущего вызова хранится временная метка нынешнего момента.
       this.lastCall = Date.now()
   
-      // Нам это будет нужно, чтобы потом сравнить,
+      // это нужно, чтобы потом сравнить,
       // когда была функция вызвана в этот раз и в предыдущий.
       // Если разница между вызовами меньше, чем указанный интервал,
-      // то мы очищаем таймаут...
+      // то мы очищаем таймаут
       if (previousCall && this.lastCall - previousCall <= timeoutMs) {
         clearTimeout(this.lastCallTimer)
       }
   
-      // ...который отвечает за непосредственно вызов функции-аргумента.
-      // Обратите внимание, что мы передаём все аргументы ...args,
-      // который получаем в функции perform —
-      // это тоже нужно, чтобы нам не приходилось менять другие части кода.
       this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs)
   
       // Если таймаут был очищен, вызова не произойдёт
       // если он очищен не был, то callee вызовется.
-      // Таким образом мы как бы «отодвигаем» вызов callee
-      // до тех пор, пока «снаружи всё не подуспокоится».
     }
   }
   
@@ -60,7 +52,7 @@ const displayAddresses = (name, description) => {
     
     liEl.addEventListener('click', (e)=> {
         selectAddress(e.target);
-        addressList.style.display = "none";
+       addressList.innerHTML = '';
 
     })
     return liEl;
@@ -68,11 +60,10 @@ const displayAddresses = (name, description) => {
 
 const request = async (url) => {
     const res = await fetch(url);
-    const data = checkResponse(res);
+    const data = await checkResponse(res);
     const result = data.response;
 
     addressList.innerHTML = "";
-    addressList.style.display = "block";
 
     result.GeoObjectCollection.featureMember.forEach(el => {
         const html = displayAddresses(el.GeoObject.name, el.GeoObject.description);
@@ -83,12 +74,13 @@ const request = async (url) => {
 
 const selectAddress = (item) => {
     addressInput.value = item.textContent;
-    getAddresses();  
 }
 
 
 const getAddresses = () => {
+
     let value = addressInput.value;
+
     if (value) {
         request(`${api}${value}${apiEnd}`);    
     }
@@ -98,5 +90,5 @@ const getAddresses = () => {
     }
 };
 
-addressInput.addEventListener('keyup', debounce(getAddresses, 250));
+addressInput.addEventListener('keyup', debounce(getAddresses, 1000));
 

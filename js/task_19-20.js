@@ -21,17 +21,28 @@ let offset = 0; // смещение необходимое для выборки
 let isLoadingPosts = false; // идёт ли подгрузка данных
 let allPosts = [];
 
+
+// Функция throttle будет принимать 2 аргумента:
+// - callee, функция, которую надо вызывать;
+// - timeout, интервал в мс, с которым следует пропускать вызовы.
 function throttle(callee, timeout) {
+
+    // Таймер будет определять, надо ли пропускать текущий вызов.
     let timer = null
 
+    // Как результат возвращаем другую функцию.
     return function perform(...args) {
+
+        // Если таймер есть, то функция уже была вызвана,
+        // и значит новый вызов следует пропустить.
         if (timer) {
             return;
         }
-
+        // Если таймера нет, значит мы можем вызвать функцию:
         timer = setTimeout(() => {
+            // Аргументы передаём неизменными в функцию-аргумент:
             callee(...args)
-
+            // По окончании очищаем таймер:
             clearTimeout(timer)
             timer = null
         }, timeout)
@@ -44,7 +55,7 @@ window.showVkData = (result) => {
         result.response.items.forEach(element => {
             if (element.copy_history !== undefined) {
                 const copyHistory = element.copy_history;
-    
+
                 for (let i = 0; i < copyHistory.length; i++) {
                     posts.push({ "text": copyHistory[i].text, "date": copyHistory[i].date });
                 }
@@ -88,7 +99,7 @@ function saveToLocalStorage() {
     let data = JSON.stringify(allPosts);
     localStorage.setItem("allPosts", data);
     localStorage.setItem("offset", offset);
-    console.log("Размер в байтах:", data.length + 2);
+    console.log("Размер в байтах:", data.length * 2);
 }
 
 function render(elements) {
